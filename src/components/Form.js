@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, { useState, useContext } from 'react'
 import { AlertContext } from '../context/alert/alertContext'
 
 export const Form = () => {
@@ -8,7 +8,13 @@ export const Form = () => {
     const submitHandler = event => {
         event.preventDefault()
 
-        alert.show(value, 'success')
+        if (value.trim()) {
+            // ...
+            alert.show('Заметка была создана', 'success')
+            setValue('')
+        } else {
+            alert.show('Введите название заметки')
+        }
     }
 
     return (
@@ -18,8 +24,8 @@ export const Form = () => {
                     type="text"
                     className="form-control"
                     placeholder="Введите название заметки"
-                    value = {value}
-                    onChange={e=>setValue(e.target.value)}
+                    value={value}
+                    onChange={e => setValue(e.target.value)}
                 />
             </div>
         </form>
